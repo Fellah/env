@@ -1,0 +1,15 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Resources": {
+		"BackUps": {
+			"Type": "AWS::S3::Bucket",
+			"Properties": {
+				"AccessControl": "Private",
+				"Tags": [ {
+					"Key": "Name",
+					"Value" : "BackUps"
+				} ]
+			}
+		}
+	}
+}
