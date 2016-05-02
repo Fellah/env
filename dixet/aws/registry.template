@@ -1,0 +1,100 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Dixet Docker registry.",
+	"Parameters": {
+		"VPC": {
+			"Type": "AWS::EC2::VPC::Id",
+			"Description": "VPC Id"
+		},
+		"Subnet": {
+			"Type": "AWS::EC2::Subnet::Id",
+			"Description": "Subnet Id"
+		},
+		"KeyName": {
+			"Type": "AWS::EC2::KeyPair::KeyName",
+			"Description": "SSH Access Key Name"
+		}
+	},
+	"Resources": {
+		"Registry": {
+			"Type": "AWS::S3::Bucket",
+			"Properties": {
+				"BucketName": "dixet-registry",
+				"AccessControl": "Private",
+				"Tags": [ {
+					"Key": "Name",
+					"Value" : "Registry"
+				} ]
+			}
+		},
+		"RegistrySecurityGroup": {
+			"Type": "AWS::EC2::SecurityGroup",
+			"Properties": {
+				"GroupDescription": "Dixet Registry SecurityGroup",
+				"VpcId": { "Ref": "VPC" },
+				"SecurityGroupIngress": [ {
+					"IpProtocol": "tcp",
+					"FromPort": "22",
+					"ToPort": "22",
+					"CidrIp": "0.0.0.0/0"
+				},
+				{
+					"IpProtocol": "tcp",
+					"FromPort": "5000",
+					"ToPort": "5000",
+					"CidrIp": "0.0.0.0/0"
+				} ],
+				"Tags": [ {
+					"Key": "Name",
+					"Value": "Dixet Registry"
+				} ]
+			}
+		},
+		"RegistryInstance": {
+			"Type": "AWS::EC2::Instance",
+			"Properties": {
+				"InstanceType": "t2.micro",
+				"ImageId": "ami-2412f34b",
+				"KeyName": { "Ref": "KeyName" },
+				"NetworkInterfaces": [ {
+					"AssociatePublicIpAddress": "true",
+					"DeviceIndex": "0",
+					"GroupSet": [ { "Ref": "RegistrySecurityGroup" } ],
+					"SubnetId": { "Ref": "Subnet" }
+				} ],
+				"Monitoring": "true",
+				"DisableApiTermination": "false",
+				"Tags": [ {
+					"Key": "Name",
+					"Value": "Dixet Registry"
+				} ]
+			}
+		},
+		"DNS": {
+			"Type": "AWS::Route53::HostedZone",
+			"Properties": {
+				"Name": "foo",
+				"VPCs": [ {
+					"VPCId": { "Ref": "VPC" },
+					"VPCRegion": "eu-central-1"
+				} ],
+				"HostedZoneTags" : [ {
+					"Key": "Name",
+					"Value": "Dixet Registry"
+				} ]
+			}
+		},
+		"RecordSet": {
+			"Type" : "AWS::Route53::RecordSet",
+			"Properties" : {
+				"HostedZoneId": { "Ref": "DNS" },
+				"Name": "registry.foo",
+				"Type": "A",
+				"TTL": "300",
+				"ResourceRecords" : [
+					{ "Fn::GetAtt" : [ "RegistryInstance", "PublicIp" ] }
+				]
+			}
+		}
+	}
+}
