@@ -1,0 +1,12 @@
+---
+- name: Zenbook
+  hosts: zenbook
+  user: fellah
+  become: yes
+  become_method: sudo
+  tasks:
+    - command: docker pull ubuntu:latest
+
+    - command: docker build --tag=fellah/ubuntu:latest /home/fellah/Devel/env/zenbook/docker/ubuntu
+
+    - command: docker build --tag=fellah/aws-cli:latest /home/fellah/Devel/env/zenbook/docker/aws-cli

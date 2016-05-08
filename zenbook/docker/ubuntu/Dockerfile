@@ -6,10 +6,11 @@ ENV DOCKER true
 
 RUN apt-get update &&\
 	apt-get -y upgrade &&\
-	apt-get -y install xdg-user-dirs
+	apt-get -y install sudo xdg-user-dirs
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/sudo &&\
 	useradd --uid 1000 --user-group --create-home fellah &&\
+	gpasswd --add fellah users &&\
 	gpasswd --add fellah sudo
 
 USER fellah
