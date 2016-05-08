@@ -1,0 +1,6 @@
+---
+- pacman: name=libmtp state=present
+
+- pacman: name=gvfs-mtp state=present
+
+- copy: src=files/51-android.rules dest=/etc/udev/rules.d/51-android.rules
