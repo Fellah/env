@@ -1,0 +1,16 @@
+---
+- pacman: name=wpa_actiond state=present
+
+- copy: src=secrets/netctl/{{ item }} dest=/etc/netctl
+  with_items:
+    - 'wifi-adrei'
+    - 'wifi-credit'
+    - 'wifi-epam'
+    - 'wifi-epam-guests'
+    - 'wifi-huawei'
+    - 'wifi-kedishko'
+    - 'wifi-laura'
+    - 'wifi-ss1'
+    - 'wifi-ss3.5'
+
+- service: name=netctl-auto@wlp2s0.service state=started enabled=yes
