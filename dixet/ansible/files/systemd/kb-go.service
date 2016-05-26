@@ -1,0 +1,14 @@
+[Unit]
+Description=Knowledge Base: Go
+
+[Service]
+Type=oneshot
+ExecStartPre=-/usr/bin/docker rm --volumes kb-go
+ExecStart=/usr/bin/docker run \
+	--name=kb-go \
+	--v "%h/Documents/Knowledge Base/Go:/srv/gitbook" \
+	--v %h/Web/kb-go:/srv/html \
+	fellah/gitbook gitbook build . /srv/html
+
+[Install]
+WantedBy=default.target

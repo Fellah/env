@@ -1,0 +1,10 @@
+[Unit]
+Description=Knowledge Base: IT
+
+[Timer]
+OnBootSec=5min
+OnCalendar=*:0/5
+Unit=kb-go.service
+
+[Install]
+WantedBy=default.target
