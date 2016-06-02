@@ -1,0 +1,9 @@
+---
+- name: Dixet
+  hosts: dixet
+  user: fellah
+  tasks:
+    - copy: src=files/systemd/ dest=~/.config/systemd/user
+
+    - command: systemctl --user daemon-reload
+    - command: systemctl --user restart kb.target
