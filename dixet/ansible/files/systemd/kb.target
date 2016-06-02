@@ -1,0 +1,6 @@
+[Unit]
+Description=Knowledge Base
+Requires=kb-career.timer
+Requires=kb-go.timer
+Requires=kb-it.timer
+Requires=kb-languages.timer
