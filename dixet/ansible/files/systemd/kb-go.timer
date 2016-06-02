@@ -1,5 +1,6 @@
 [Unit]
 Description=Knowledge Base: IT
+PartOf=kb.target
 
 [Timer]
 OnBootSec=5min
