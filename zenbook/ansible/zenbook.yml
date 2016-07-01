@@ -8,3 +8,5 @@
     - include: tasks/netctl.yml
 
     - include: tasks/mtp.yml
+
+    - include: tasks/xorg.yml
