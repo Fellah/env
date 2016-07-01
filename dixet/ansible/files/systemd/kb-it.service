@@ -6,8 +6,8 @@ Type=oneshot
 ExecStartPre=-/usr/bin/docker rm --volumes kb-it
 ExecStart=/usr/bin/docker run \
 	--name=kb-it \
-	--v "%h/Documents/Knowledge Base/IT:/srv/gitbook" \
-	--v %h/Web/kb-it:/srv/html \
+	-v "%h/Documents/Knowledge Base/IT":/srv/gitbook \
+	-v %h/Web/kb-it:/srv/html \
 	fellah/gitbook gitbook build . /srv/html
 
 [Install]

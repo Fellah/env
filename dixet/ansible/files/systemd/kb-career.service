@@ -6,8 +6,8 @@ Type=oneshot
 ExecStartPre=-/usr/bin/docker rm --volumes kb-career
 ExecStart=/usr/bin/docker run \
 	--name=kb-career \
-	--v "%h/Documents/Knowledge Base/Career:/srv/gitbook" \
-	--v %h/Web/kb-career:/srv/html \
+	-v "%h/Documents/Knowledge Base/Career":/srv/gitbook \
+	-v %h/Web/kb-career:/srv/html \
 	fellah/gitbook gitbook build . /srv/html
 
 [Install]

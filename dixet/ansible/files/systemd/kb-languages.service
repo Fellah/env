@@ -6,8 +6,8 @@ Type=oneshot
 ExecStartPre=-/usr/bin/docker rm --volumes kb-languages
 ExecStart=/usr/bin/docker run \
 	--name=kb-languages \
-	--v "%h/Documents/Knowledge Base/Languages:/srv/gitbook" \
-	--v %h/Web/kb-languages:/srv/html \
+	-v "%h/Documents/Knowledge Base/Languages":/srv/gitbook \
+	-v %h/Web/kb-languages:/srv/html \
 	fellah/gitbook gitbook build . /srv/html
 
 [Install]
