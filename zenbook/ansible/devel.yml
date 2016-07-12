@@ -6,3 +6,6 @@
   become_method: sudo
   tasks:
     - pacman: name=jq state=present
+
+    - pacman: name=virtualbox-host-modules-arch state=present
+    - pacman: name=virtualbox state=present
