@@ -37,10 +37,10 @@
         insertafter: "^::1"
         line: "127.0.1.1\tzenbook.localdomain\tzenbook"
 
-    - name: Install sudo
-      pacman: name=sudo state=present
 
-    - name: Config sudo for wheel group
-      copy: src=files/wheel dest=/etc/sudoers.d/wheel
 
-    # - include: tasks/fellah.yml
+    - include: tasks/sudo.yml
+
+    - include: tasks/users.yml
+
+    - include: tasks/ssh.yml

@@ -1,0 +1,14 @@
+---
+- user:
+    name: fellah
+    comment: "Fellah"
+    groups: users,wheel
+    password: $1$H/lT89WH$mGIFw8BlBsvQwj8kRFwfa1
+
+- name: Set authorized key
+  authorized_key:
+    user: fellah
+    state: present
+    key: "{{ item }}"
+  with_file:
+    - secrets/id_rsa.pub

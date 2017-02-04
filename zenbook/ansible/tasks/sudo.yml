@@ -1,0 +1,6 @@
+---
+- name: Install 'sudo'
+  pacman: name=sudo state=present
+
+- name: Config sudo for wheel group
+  copy: src=files/wheel dest=/etc/sudoers.d/wheel

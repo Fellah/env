@@ -1,0 +1,18 @@
+---
+- name: Config SSH Deamon
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#?PermitRootLogin"
+    line: "PermitRootLogin no"
+
+- name: Config SSH Deamon
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    insertafter: EOF
+    regexp: "^AllowUsers"
+    line: "AllowUsers fellah"
+
+- name: Reload SSH Deamon
+  service:
+    name: sshd
+    state: reloaded
