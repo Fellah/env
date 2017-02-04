@@ -1,0 +1,15 @@
+---
+- name: Install Xorg
+  pacman:
+    name: xorg-server,xorg-server-utils,xorg-xinit
+    state: present
+
+- name: Install Mesa
+  pacman:
+    name: mesa
+    state: present
+
+- name: Install Xorg Apps
+  pacman:
+    name: xorg-twm,xorg-xclock,xterm
+    state: present

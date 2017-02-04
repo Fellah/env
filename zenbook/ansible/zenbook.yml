@@ -5,6 +5,8 @@
   become: yes
   become_method: sudo
   tasks:
+    - include: tasks/vbox-guest.yml
+
     - include: tasks/ssh.yml
 
     # - include: tasks/netctl.yml
@@ -13,4 +15,4 @@
 
     - include: tasks/fellah.yml
 
-    # - include: tasks/xorg.yml
+    - include: tasks/xorg.yml
