@@ -11,8 +11,3 @@
     insertafter: EOF
     regexp: "^AllowUsers"
     line: "AllowUsers fellah"
-
-- name: Reload SSH Deamon
-  service:
-    name: sshd
-    state: reloaded
