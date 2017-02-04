@@ -1,0 +1,50 @@
+#!/bin/bash
+
+TMPDIR=$XDG_CACHE_HOME/tmp
+
+if [ ! -d $TMPDIR ]; then
+        mkdir --mode=777 $TMPDIR
+fi
+
+## History
+
+HISTORY=$XDG_CACHE_HOME/history
+
+if [ ! -d $HISTORY ]; then
+        mkdir --mode=700 $HISTORY
+fi
+
+export HISTFILE=$HISTORY/bash
+export HISTCONTROL=ignoreboth
+
+export LESSHISTFILE=$HISTORY/less
+
+export PSQL_HISTORY=$HISTORY/psql
+
+export REDISCLI_HISTFILE=$HISTORY/redis-cli
+
+
+
+## Base
+
+export EDITOR=vim
+
+
+
+# Applications
+
+export GOPATH=$HOME/Devel/go
+export GOBIN=$GOPATH/bin
+export GOPATH=$GOPATH:$HOME/Devel/softswiss/aggregator
+export PATH=$PATH:$GOBIN
+
+export ATOM_HOME=$XDG_CONFIG_HOME/atom
+export MYSQL_HOME=$XDG_CONFIG_HOME/mysql
+export MYSQL_HISTFILE=$HISTORY/mysql
+export VBOX_USER_HOME=$XDG_CONFIG_HOME/virtualbox
+export WGETRC=$XDG_CONFIG_HOME/wgetrc
+
+export NPM_CONFIG_PREFIX=$XDG_CONFIG_HOME/npm
+
+###
+#export GRADLE_USER_HOME=$XDG_CONFIG_HOME/gradle

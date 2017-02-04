@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $HOSTNAME == abs* ]]; then
+	return 0
+fi
+
+abs(){
+	docker run \
+		--interactive \
+		--tty \
+		--volume $HOME:/home/fellah \
+		--hostname abs \
+		--rm \
+		$@ fellah/abs
+}

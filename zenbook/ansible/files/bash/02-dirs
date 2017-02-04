@@ -1,0 +1,7 @@
+#!/bin/bash
+
+LOGDIR=$XDG_CACHE_HOME/log
+
+if [ ! -d $LOGDIR ]; then
+	mkdir --mode=700 $LOGDIR
+fi
