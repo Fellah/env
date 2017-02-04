@@ -5,8 +5,12 @@
   become: yes
   become_method: sudo
   tasks:
-    - include: tasks/netctl.yml
+    - include: tasks/ssh.yml
 
-    - include: tasks/mtp.yml
+    # - include: tasks/netctl.yml
 
-    - include: tasks/xorg.yml
+    # - include: tasks/mtp.yml
+
+    - include: tasks/fellah.yml
+
+    # - include: tasks/xorg.yml
