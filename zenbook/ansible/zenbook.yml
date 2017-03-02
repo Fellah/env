@@ -6,12 +6,18 @@
   become_method: sudo
   tasks:
     - include: tasks/vbox-guest.yml
+      when: "'vm' in inventory_hostname"
 
     - include: tasks/ssh.yml
 
-    # - include: tasks/netctl.yml
+    - name: Install 'xdg-user-dirs'
+      pacman:
+        name: xdg-user-dirs
+        state: present
 
-    # - include: tasks/mtp.yml
+    - include: tasks/netctl.yml
+
+    - include: tasks/mtp.yml
 
     - include: tasks/fellah.yml
 
