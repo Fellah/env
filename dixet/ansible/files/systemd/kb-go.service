@@ -3,7 +3,7 @@ Description=Knowledge Base: Go
 
 [Service]
 Type=oneshot
-ExecStartPre=-/usr/bin/docker rm --volumes kb-go
+ExecStartPre=-/usr/bin/docker rm kb-go
 ExecStart=/usr/bin/docker run \
 	--name=kb-go \
 	-v "%h/Documents/Knowledge Base/Go":/srv/gitbook \

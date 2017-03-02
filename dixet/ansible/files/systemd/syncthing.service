@@ -1,0 +1,16 @@
+[Unit]
+Description=Syncthing
+
+[Service]
+ExecStartPre=-/usr/bin/docker rm -f syncthing
+ExecStart=/usr/bin/docker run \
+	-p 22000:22000 \
+	-v %h/.cache:/home/fellah/.cache \
+	-v %h/.config:/home/fellah/.config \
+	-v %h/Documents:/home/fellah/Documents \
+	-v %h/Web:/home/fellah/Web \
+	--rm --name=syncthing syncthing-fellah
+ExecStop=/usr/bin/docker stop syncthing
+
+[Install]
+WantedBy=default.target

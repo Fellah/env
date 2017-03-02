@@ -1,0 +1,14 @@
+[Unit]
+Description=ABS
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=rm -f /srv/html/abs/dixet.db /srv/html/abs/dixet.db.tar.gz
+ExecStart=/usr/bin/docker run \
+		-v /srv/html/abs:/srv/abs \
+		--rm fellah/abs sh -c 'repo-add dixet.db.tar.gz *.pkg.tar.xz'
+
+[Install]
+WantedBy=multi-user.target

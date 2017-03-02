@@ -1,0 +1,11 @@
+[Unit]
+Description=Knowledge Base: Languages
+PartOf=kb.target
+
+[Timer]
+OnBootSec=5min
+OnCalendar=*:0/5
+Unit=kb-languages.service
+
+[Install]
+WantedBy=default.target
