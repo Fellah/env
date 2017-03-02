@@ -1,17 +1,17 @@
 [Unit]
-Description=Proxy
-After=syncthing.service
-Requires=syncthing.service
+Description=Web
 
 [Service]
-ExecStartPre=-/usr/bin/docker rm -f proxy
+ExecStartPre=-/usr/bin/docker pull nginx:1.10
+ExecStartPre=-/usr/bin/docker rm web
 ExecStart=/usr/bin/docker run \
-	--link syncthing:syncthing \
-	-p 80:80 \
-	-v %h/.config/nginx/default.conf:/etc/nginx/conf.d/default.conf \
-	-v %h/Web:/usr/share/nginx/html:ro \
-	--rm --name=proxy nginx
-ExecStop=/usr/bin/docker stop proxy
+	--publish 80:80 \
+	--volume %h/.config/web.conf:/etc/nginx/conf.d/default.conf \
+	--volume %h/.cache/web:/usr/share/nginx/html:ro \
+	--rm \
+	--name=web \
+	nginx:1.10
+ExecStop=/usr/bin/docker stop web
 
 [Install]
 WantedBy=default.target
