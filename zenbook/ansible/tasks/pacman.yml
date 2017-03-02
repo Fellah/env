@@ -1,0 +1,10 @@
+---
+- copy:
+    src: files/repos
+    dest: /etc/pacman.d
+
+- lineinfile:
+    dest: /etc/pacman.conf
+    insertafter: EOF
+    regexp: "^Include = /etc/pacman.d/repos"
+    line: "Include = /etc/pacman.d/repos"
