@@ -1,0 +1,24 @@
+#!/bin/bash
+
+export AWS_CONFIG_FILE=$XDG_CONFIG_HOME/aws/config
+export AWS_SHARED_CREDENTIALS_FILE=$XDG_CONFIG_HOME/aws/credentials
+
+if [[ $HOSTNAME == aws-cli* ]]; then
+	return 0
+fi
+
+aws-cli(){
+	docker run \
+		--interactive \
+		--tty \
+		--volume $HOME:/home/fellah \
+		--hostname aws-cli \
+		--rm \
+		$@ fellah/aws-cli
+}
+
+alias aws-cli-firefunder='aws-cli --hostname aws-cli-firefunder --env AWS_DEFAULT_PROFILE=firefunder'
+
+alias aws-cli-firefunder-test='aws-cli --hostname aws-cli-firefunder-test --env AWS_DEFAULT_PROFILE=firefunder-test'
+
+alias aws-cli-rcdms='aws-cli --hostname aws-cli-rcdms --env AWS_DEFAULT_PROFILE=rcdms-dev-appserver'

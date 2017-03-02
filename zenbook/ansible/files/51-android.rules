@@ -1,1 +1,2 @@
-SUBSYSTEM=="usb", ATTR{idVendor}=="12d1", MODE="0666", GROUP="plugdev"
+## https://wiki.archlinux.org/index.php/MTP#Media_players
+SUBSYSTEM=="usb", ATTR{idVendor}=="12d1", ATTR{idProduct}=="1039" MODE="0666", GROUP="users"

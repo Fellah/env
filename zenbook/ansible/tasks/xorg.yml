@@ -1,0 +1,23 @@
+---
+- name: Install Xorg
+  pacman:
+    name: xorg-server,xorg-server-utils,xorg-xinit,xf86-input-synaptics
+    state: present
+
+- name: Install Mesa
+  pacman:
+    name: mesa
+    state: present
+
+- name: Install i3
+  pacman:
+    name: i3, dmenu
+    state: present
+
+- name: Install xterm
+  pacman:
+    name: xterm
+    state: present
+
+- name: Create '~/.xinitrc'
+  copy: src=files/xinitrc dest=/home/fellah/.xinitrc

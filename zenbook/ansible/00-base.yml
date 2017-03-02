@@ -1,0 +1,46 @@
+---
+- name: Zenbook
+  hosts: zenbook
+  user: root
+  tasks:
+    - name: Set the time zone
+      file:
+        src: /usr/share/zoneinfo/UTC
+        dest: /etc/localtime
+        state: link
+        force: yes
+
+    - name: Generate '/etc/adjtime'
+      command: hwclock --systohc
+      changed_when: false
+
+    - name: Uncomment needed localizations
+      lineinfile:
+        dest: /etc/locale.gen
+        regexp: "^#?en_US.UTF-8 UTF-8"
+        line: "en_US.UTF-8 UTF-8"
+
+    - name: Generate localizations
+      command: locale-gen
+      changed_when: false
+
+    - name: Create '/etc/locale.conf' file to set LANG varaible
+      copy: src=files/locale.conf dest=/etc/locale.conf
+
+    - name: Create '/etc/hostname' file
+      copy: src=files/hostname dest=/etc/hostname
+
+    - name: Config '/etc/hosts'
+      lineinfile:
+        dest: /etc/hosts
+        regexp: "^127.0.1.1"
+        insertafter: "^::1"
+        line: "127.0.1.1\tzenbook.localdomain\tzenbook"
+
+
+
+    - include: tasks/sudo.yml
+
+    - include: tasks/users.yml
+
+    - include: tasks/ssh.yml

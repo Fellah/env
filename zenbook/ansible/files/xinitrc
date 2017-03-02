@@ -1,0 +1,16 @@
+#!/bin/bash
+
+case $2 in
+mate)
+	exec mate-session
+	;;
+i3)
+	exec i3
+	;;
+*)
+	exec mate-session
+	;;
+esac
+
+#exec i3
+#exec mate-session

@@ -1,0 +1,11 @@
+---
+- name: Install VirtualBox guest modules and utils
+  pacman:
+    name: virtualbox-guest-modules-arch,virtualbox-guest-utils
+    state: present
+
+- name: Start VirtualBox service
+  systemd:
+    name: vboxservice
+    state: started
+    enabled: yes

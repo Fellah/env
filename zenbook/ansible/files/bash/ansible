@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ ! -d $XDG_CONFIG_HOME/ansible/ ]; then
+	mkdir --mode 700 $XDG_CONFIG_HOME/ansible
+fi
+
+export ANSIBLE_CONFIG=$XDG_CONFIG_HOME/ansible/ansible.cfg
+
+if [[ $HOSTNAME == ansible* ]]; then
+	return 0
+fi
+
+ansible(){
+	docker run \
+		--interactive \
+		--tty \
+		--volume $HOME:/home/fellah \
+		--hostname ansible \
+		--rm \
+		$@ fellah/ansible
+}

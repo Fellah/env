@@ -1,0 +1,10 @@
+# - name: insert/update "Match User" configuration block in /etc/ssh/sshd_config
+#   blockinfile:
+#     dest: /home/fellah/.bashrc
+#     marker: ""
+#     block: |
+#       source $HOME/.config/bash
+
+# - synchronize:
+#     src: files/bash
+#     dest: /home/fellah/.config
