@@ -5,17 +5,21 @@
   become: yes
   become_method: sudo
   tasks:
+    - include: tasks/pacman.yml
+
     - include: tasks/vbox-guest.yml
       when: "'vm' in inventory_hostname"
 
     - include: tasks/ssh.yml
+      when: "'vm' in inventory_hostname"
 
     - name: Install 'xdg-user-dirs'
       pacman:
         name: xdg-user-dirs
         state: present
 
-    - include: tasks/netctl.yml
+    # - include: tasks/netctl.yml
+    #   when: "'vm' in inventory_hostname"
 
     - include: tasks/mtp.yml
 
