@@ -1,0 +1,3 @@
+[dixet]
+SigLevel = Optional TrustAll
+Server = http://dixet.org/abs
