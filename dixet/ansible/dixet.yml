@@ -3,7 +3,20 @@
   hosts: dixet
   user: fellah
   tasks:
-    - copy: src=files/systemd/ dest=~/.config/systemd/user
+    - file:
+        path: $HOME/.cache/web/abs
+        state: directory
 
-    - command: systemctl --user daemon-reload
-    - command: systemctl --user restart kb.target
+    - copy:
+        src: files/web.conf
+        dest: $HOME/.config
+
+    - copy:
+        src: files/systemd/web.service
+        dest: $HOME/.config/systemd/user
+
+    - systemd:
+        user: yes
+        enabled: yes
+        state: started
+        name: web
