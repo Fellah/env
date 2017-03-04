@@ -25,4 +25,8 @@
 
     - include: tasks/fellah.yml
 
+    - pacman:
+        name: bash-completion
+        state: present
+
     - include: tasks/xorg.yml
